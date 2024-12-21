@@ -1,0 +1,147 @@
+{
+    "name": "python",
+    "file_extensions": [".py", ".pyi", ".pyx"],
+    "linters": [
+        "pylint",
+        "flake8",
+        "mypy",
+        "pyright"
+    ],
+    "formatters": [
+        "black",
+        "yapf",
+        "autopep8"
+    ],
+    "test_frameworks": [
+        "pytest",
+        "unittest",
+        "nose2"
+    ],
+    "build_tools": [
+        "setuptools",
+        "poetry",
+        "flit"
+    ],
+    "package_managers": [
+        "pip",
+        "poetry",
+        "conda"
+    ],
+    "docker_base_images": [
+        "python:3.11-slim",
+        "python:3.11",
+        "python:3.11-alpine"
+    ],
+    "best_practices": [
+        {
+            "category": "code_style",
+            "rules": [
+                "Follow PEP 8 style guide",
+                "Use type hints",
+                "Document using docstrings",
+                "Keep functions small and focused"
+            ]
+        },
+        {
+            "category": "project_structure",
+            "rules": [
+                "Use src layout",
+                "Separate tests from source",
+                "Include setup.py/pyproject.toml",
+                "Add comprehensive README"
+            ]
+        },
+        {
+            "category": "testing",
+            "rules": [
+                "Write unit tests",
+                "Use fixtures for test data",
+                "Mock external dependencies",
+                "Aim for high coverage"
+            ]
+        },
+        {
+            "category": "security",
+            "rules": [
+                "Use dependency scanning",
+                "Validate all inputs",
+                "Use secure defaults",
+                "Keep dependencies updated"
+            ]
+        }
+    ],
+    "common_patterns": [
+        {
+            "name": "dependency_injection",
+            "code": """class Service:
+    def __init__(self, dependency):
+        self.dependency = dependency
+        
+    def process(self, data):
+        return self.dependency.handle(data)""",
+            "description": "Dependency injection pattern for better testing and modularity"
+        },
+        {
+            "name": "context_manager",
+            "code": """class ResourceManager:
+    def __init__(self, resource):
+        self.resource = resource
+        
+    def __enter__(self):
+        # Setup resource
+        return self.resource
+        
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # Cleanup resource
+        pass""",
+            "description": "Context manager pattern for resource management"
+        }
+    ],
+    "deployment_templates": {
+        "fastapi": {
+            "dockerfile": """FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]""",
+            "docker_compose": """version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/dbname
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=dbname""",
+            "kubernetes": """apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: app:latest
+        ports:
+        - containerPort: 8000"""
+        }
+    }
+}

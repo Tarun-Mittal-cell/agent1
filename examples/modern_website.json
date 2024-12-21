@@ -1,0 +1,65 @@
+{
+    "name": "modern_portfolio",
+    "type": "web_application",
+    "stack": {
+        "frontend": {
+            "framework": "next.js",
+            "styling": "tailwindcss",
+            "features": [
+                "dark_mode",
+                "animations",
+                "responsive_design",
+                "seo_optimization"
+            ]
+        },
+        "backend": {
+            "framework": "fastapi",
+            "database": "postgresql",
+            "features": [
+                "authentication",
+                "api_endpoints",
+                "file_uploads"
+            ]
+        }
+    },
+    "pages": [
+        {
+            "name": "Home",
+            "components": [
+                "HeroSection",
+                "FeaturedProjects",
+                "AboutSection",
+                "ContactForm"
+            ]
+        },
+        {
+            "name": "Projects",
+            "components": [
+                "ProjectGrid",
+                "ProjectFilters",
+                "ProjectSearch"
+            ]
+        },
+        {
+            "name": "Blog",
+            "components": [
+                "BlogPosts",
+                "Categories",
+                "SearchBar"
+            ]
+        }
+    ],
+    "design": {
+        "theme": "modern",
+        "colors": {
+            "primary": "#0070f3",
+            "secondary": "#7928ca",
+            "background": "#ffffff",
+            "text": "#000000"
+        },
+        "fonts": {
+            "heading": "Inter",
+            "body": "Inter"
+        }
+    }
+}

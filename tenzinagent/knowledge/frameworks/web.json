@@ -1,0 +1,81 @@
+{
+  "frontend": {
+    "react": {
+      "templates": {
+        "component": "import React from 'react';\n\nexport const Component = () => {\n  return <div></div>;\n};\n",
+        "page": "import React from 'react';\nimport Head from 'next/head';\n\nexport default function Page() {\n  return (\n    <div>\n      <Head>\n        <title>Page Title</title>\n      </Head>\n      <main></main>\n    </div>\n  );\n}\n",
+        "api": "export default async function handler(req, res) {\n  try {\n    // Implementation\n  } catch (error) {\n    res.status(500).json({ error: error.message });\n  }\n}\n"
+      },
+      "best_practices": [
+        "Use functional components with hooks",
+        "Implement proper error boundaries",
+        "Follow React Query patterns for data fetching",
+        "Use proper TypeScript types"
+      ]
+    },
+    "next": {
+      "templates": {
+        "app_layout": "export default function RootLayout({ children }) {\n  return (\n    <html lang=\"en\">\n      <body>{children}</body>\n    </html>\n  );\n}\n",
+        "page": "export default function Page() {\n  return <main></main>;\n}\n",
+        "api_route": "export async function GET(request) {\n  try {\n    // Implementation\n  } catch (error) {\n    return Response.json({ error: error.message }, { status: 500 });\n  }\n}\n"
+      }
+    }
+  },
+  "backend": {
+    "node": {
+      "express": {
+        "templates": {
+          "server": "import express from 'express';\nconst app = express();\n\napp.use(express.json());\n\napp.listen(3000, () => console.log('Server running'));\n",
+          "route": "import express from 'express';\nconst router = express.Router();\n\nrouter.get('/', async (req, res) => {\n  try {\n    // Implementation\n  } catch (error) {\n    res.status(500).json({ error: error.message });\n  }\n});\n\nexport default router;\n"
+        }
+      }
+    },
+    "python": {
+      "fastapi": {
+        "templates": {
+          "main": "from fastapi import FastAPI\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp = FastAPI()\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=['*'],\n    allow_credentials=True,\n    allow_methods=['*'],\n    allow_headers=['*'],\n)\n",
+          "router": "from fastapi import APIRouter\n\nrouter = APIRouter()\n\n@router.get('/')\nasync def root():\n    try:\n        # Implementation\n        pass\n    except Exception as e:\n        raise HTTPException(status_code=500, detail=str(e))\n"
+        }
+      }
+    }
+  },
+  "mobile": {
+    "react_native": {
+      "templates": {
+        "app": "import React from 'react';\nimport { NavigationContainer } from '@react-navigation/native';\n\nexport default function App() {\n  return (\n    <NavigationContainer>\n      {/* Navigation setup */}\n    </NavigationContainer>\n  );\n}\n",
+        "screen": "import React from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\n\nexport default function Screen() {\n  return (\n    <View style={styles.container}>\n      <Text>Screen Content</Text>\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    alignItems: 'center',\n    justifyContent: 'center',\n  },\n});\n"
+      }
+    },
+    "flutter": {
+      "templates": {
+        "app": "import 'package:flutter/material.dart';\n\nvoid main() {\n  runApp(const MyApp());\n}\n\nclass MyApp extends StatelessWidget {\n  const MyApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'App Title',\n      theme: ThemeData(\n        primarySwatch: Colors.blue,\n      ),\n      home: const MyHomePage(),\n    );\n  }\n}\n"
+      }
+    }
+  },
+  "devops": {
+    "docker": {
+      "templates": {
+        "node": "FROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"npm\", \"start\"]\n",
+        "python": "FROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install -r requirements.txt\nCOPY . .\nEXPOSE 8000\nCMD [\"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\"]\n"
+      }
+    },
+    "kubernetes": {
+      "templates": {
+        "deployment": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: app-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: myapp\n  template:\n    metadata:\n      labels:\n        app: myapp\n    spec:\n      containers:\n      - name: myapp\n        image: myapp:latest\n        ports:\n        - containerPort: 80\n",
+        "service": "apiVersion: v1\nkind: Service\nmetadata:\n  name: app-service\nspec:\n  selector:\n    app: myapp\n  ports:\n    - port: 80\n      targetPort: 80\n  type: LoadBalancer\n"
+      }
+    }
+  },
+  "games": {
+    "unity": {
+      "templates": {
+        "player_controller": "using UnityEngine;\n\npublic class PlayerController : MonoBehaviour\n{\n    public float speed = 5f;\n    \n    void Update()\n    {\n        float horizontal = Input.GetAxis(\"Horizontal\");\n        float vertical = Input.GetAxis(\"Vertical\");\n        Vector3 movement = new Vector3(horizontal, 0f, vertical);\n        transform.Translate(movement * speed * Time.deltaTime);\n    }\n}\n"
+      }
+    },
+    "unreal": {
+      "templates": {
+        "character": "// Character.h\n#pragma once\n#include \"CoreMinimal.h\"\n#include \"GameFramework/Character.h\"\n#include \"MyCharacter.generated.h\"\n\nUCLASS()\nclass MYGAME_API AMyCharacter : public ACharacter\n{\n    GENERATED_BODY()\n\npublic:\n    AMyCharacter();\n\nprotected:\n    virtual void BeginPlay() override;\n\npublic:\n    virtual void Tick(float DeltaTime) override;\n};\n"
+      }
+    }
+  }
+}
